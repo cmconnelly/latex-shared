@@ -1,0 +1,390 @@
+\typeout{Okay, we're yummy!}
+\ifthenelse{\isundefined{\if@mainmatter}}%
+  {\RequirePackage{chaparral}}%
+  {\RequirePackage[fixbookheaders]{chaparral}}
+
+
+%\RequirePackage{keplerornaments}%
+%\RequirePackage{psexpert}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Make Cronos the sans-serif font family
+\renewcommand{\sfdefault}{pkc9}
+\def\sftndefault{pkc}%                  % (sans font for titling numerals)
+\def\sffndefault{pkc1}%                 % (sans font for footnote numbers)
+
+%% Allow us to use a variant of Cronos with titling numerals for some
+%% things...
+\DeclareRobustCommand\titlesffamily{%
+   \not@math@alphabet\titlesffamily\mathsf%
+   \fontfamily{pkc}\selectfont}
+
+\DeclareTextFontCommand{\texttsf}{\titlesffamily}
+
+%% We'll do the same for our roman font, Kepler.
+\DeclareRobustCommand\titlermfamily{%
+   \not@math@alphabet\titlermfamily\mathrm%
+   \fontfamily{pch}\selectfont}
+\DeclareTextFontCommand{\texttrm}{\titlermfamily}
+
+% We'll also define commands to allow us to have italic small caps
+
+\DeclareRobustCommand\emphsfsc{%
+   \fontfamily{pkc9}\fontshape{itsc}\selectfont}
+\DeclareTextFontCommand{\textsfemsc}{\emphsfsc}
+
+\DeclareRobustCommand\emphsf{%
+   \fontfamily{pch9}\fontshape{itsc}\selectfont}
+\DeclareTextFontCommand{\textemsc}{\emphsc}
+
+
+% We want to be able to have subtitles.  Step one, define a command to
+% hold such a thing:
+\newboolean{@stset}
+\setboolean{@stset}{false}
+\def\subtitle#1{\gdef\@subtitle{#1}%
+  \setboolean{@stset}{true}}
+\def\@subtitle{}
+
+
+\global\let\@subtitle\@empty
+%\global\let\subtitle\relax
+
+
+\if@twoside
+  \renewcommand{\ps@headings}{%
+      \let\@oddfoot\@empty\let\@evenfoot\@empty
+      \def\@evenhead{\thepage\hfil{\sffamily\fontshape{itsc}\selectfont\leftmark}}%
+      \def\@oddhead{{\sffamily\fontshape{itsc}\selectfont\rightmark}\hfil\thepage}%
+      \let\@mkboth\markboth
+    \renewcommand{\sectionmark}[1]{%
+      \markboth {{
+        \ifnum \c@secnumdepth >\z@
+          \titlesf{\thesection}\quad
+        \fi
+        ##1}}{}}%
+    \renewcommand{\subsectionmark}[1]{%
+      \markright {%
+        \ifnum \c@secnumdepth >\@ne
+          \titlesf{\thesubsection}\quad
+        \fi
+        ##1}}}
+\else
+  \renewcommand{\ps@headings}{%
+    \let\@oddfoot\@empty
+    \def\@oddhead{{\sffamily\fontshape{itsc}\selectfont\rightmark}\hfil\thepage}%
+    \let\@mkboth\markboth
+    \renewcommand{\sectionmark}[1]{%
+      \markright {{%
+        \ifnum \c@secnumdepth >\m@ne
+          \titlesf{\thesection}\quad
+        \fi
+        ##1}}}}
+\fi
+\renewcommand{\ps@myheadings}{%
+    \let\@oddfoot\@empty\let\@evenfoot\@empty
+    \def\@evenhead{\thepage\hfil{%
+          \sffamily\fontshape{itsc}\selectfont\leftmark}}%
+    \def\@oddhead{{\sffamily\fontshape{itsc}\selectfont\rightmark}%
+       \hfil\thepage}%
+    \let\@mkboth\@gobbletwo
+    \let\sectionmark\@gobble
+    \let\subsectionmark\@gobble
+    }
+  \if@titlepage
+  \renewcommand\maketitle{\begin{titlepage}%
+  \let\footnotesize\small
+  \let\footnoterule\relax
+  \let \footnote \thanks
+  \null\vfil
+  \vskip 60\p@
+  \begin{center}%
+%    \newlength{\@stwidth}%
+%    \settowidth{\@stwidth}{\@subtitle}%
+     {\titlesf{\LARGE \@title}%
+%       \ifthenelse{\lengthtest{\@stwidth>100em}}{%
+      \ifthenelse{\boolean{\@stset}}{%
+       \linebreak \titlesf{\small \@subtitle\ bar}}%
+       {\linebreak \textbf{foo}}
+%     {%
+%       \typeout{stwidth is huge}%
+%       \textbf{foo}}
+       \par}%
+    \vskip 3em%
+    {\large
+     \lineskip .75em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+      \vskip 1.5em%
+    {\large \@date \par}%       % Set date in \large size.
+  \end{center}\par
+  \@thanks
+  \vfil\null
+  \end{titlepage}%
+  \setcounter{footnote}{0}%
+  \global\let\thanks\relax
+  \global\let\maketitle\relax
+  \global\let\@thanks\@empty
+  \global\let\@author\@empty
+  \global\let\@date\@empty
+  \global\let\@title\@empty
+  \global\let\title\relax
+  \global\let\@subtitle\@empty
+  \global\let\subtitle\relax
+  \global\let\@subtitle\@empty
+  \global\let\subtitle\relax
+  \global\let\author\relax
+  \global\let\date\relax
+  \global\let\and\relax
+}
+\else
+\renewcommand{\maketitle}{\par
+  \begingroup
+    \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
+    \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
+    \long\def\@makefntext##1{\parindent 1em\noindent
+            \hb@xt@1.8em{%
+                \hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
+    \if@twocolumn
+      \ifnum \col@number=\@ne
+        \@maketitle
+      \else
+        \twocolumn[\@maketitle]%
+      \fi
+    \else
+      \newpage
+      \global\@topnum\z@   % Prevents figures from going at top of page.
+      \@maketitle
+    \fi
+    \thispagestyle{plain}\@thanks
+  \endgroup
+  \setcounter{footnote}{0}%
+  \global\let\thanks\relax
+  \global\let\maketitle\relax
+  \global\let\@maketitle\relax
+  \global\let\@thanks\@empty
+  \global\let\@author\@empty
+  \global\let\@date\@empty
+  \global\let\@title\@empty
+  \global\let\title\relax
+  \global\let\@subtitle\@empty
+  \global\let\subtitle\relax
+  \global\let\author\relax
+  \global\let\date\relax
+  \global\let\and\relax
+}
+\renewcommand{\@maketitle}{%
+  \newpage
+  \null
+  \vskip 2em%
+  \begin{center}%
+  \let \footnote \thanks
+    \titlesf{{\LARGE \@title}} \par%
+    \vskip 1em%
+    \titlesf{{\small \@subtitle}} \par%
+    \vskip 1.5em%
+    {\large
+      \lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+    \vskip 1em%
+    {\large \@date}%
+  \end{center}%
+  \par
+  \vskip 1.5em}
+\fi
+
+% We also want to have section headers appear in Cronos:
+\renewcommand{\@seccntformat}[1]{{\fontfamily{pkc}\selectfont\csname%
+the#1\endcsname}\quad}%
+\providecommand{\titlesf}[1]{{\fontfamily{pkc}\selectfont #1}}
+
+% \renewcommand\thepart {\titlesf{\@Roman\c@part}}
+% \renewcommand\thesection {\titlesf{\@arabic\c@section}}
+% \renewcommand\thesubsection   {\titlesf{\thesection.\@arabic\c@subsection}}
+% \renewcommand\thesubsubsection{\titlesf{\thesubsection .\@arabic\c@subsubsection}}
+% \renewcommand\theparagraph    {\titlesf{\thesubsubsection .\@arabic\c@paragraph}}
+% \renewcommand\thesubparagraph {\titlesf{\theparagraph.\@arabic\c@subparagraph}}
+
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\sffamily\Large\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\sffamily\large\bfseries}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\sffamily\normalsize\bfseries}}
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                                    {3.25ex \@plus1ex \@minus.2ex}%
+                                    {-1em}%
+                                    {\sffamily\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
+                                       {3.25ex \@plus1ex \@minus .2ex}%
+                                       {-1em}%
+                                      {\sffamily\normalsize\bfseries}}
+
+\def\@part[#1]#2{%
+    \ifnum \c@secnumdepth >\m@ne
+      \refstepcounter{part}%
+      \addcontentsline{toc}{part}{\titlesf{\thepart\hspace{1em}#1}}%
+    \else
+      \addcontentsline{toc}{part}{\titlesf{#1}}%
+    \fi
+    {\parindent \z@ \raggedright
+     \interlinepenalty \@M
+%     \normalfont
+     \ifnum \c@secnumdepth >\m@ne
+       \Large\titlesf{\textbf{\partname\nobreakspace\thepart}}
+       \par\nobreak
+     \fi
+     \huge \titlesf{\textbf{#2}}%
+     \markboth{}{}\par}%
+    \nobreak
+    \vskip 3ex
+    \@afterheading}
+\def\@spart#1{%
+    {\parindent \z@ \raggedright
+     \interlinepenalty \@M
+%     \normalfont
+     \huge \titlesf{\textbf{#1}}\par}%
+     \nobreak
+     \vskip 3ex
+     \@afterheading}
+
+%% If we're using book or report or something similar (something with
+%% chapters, basically), we'll need to make some changes.
+\if@bookish
+\typeout{We're bookish, baby.}
+
+\renewcommand{\maketitle}{%
+   \begin{titlepage}%
+      \let\footnotesize\small
+      \let\footnoterule\relax
+      \let \footnote \thanks
+      \null\vfil
+      \vskip 60\p@
+      \begin{center}%
+         {\titlesf{\LARGE \@title} \par}%
+         \vskip 3em%
+         {\titlesf{\large
+            \lineskip .75em%
+            \begin{tabular}[t]{c}%
+               \@author
+            \end{tabular}}\par}%
+         \vskip 1.5em%
+         {\titlesf{\large \@date} \par}%       % Set date in \large size.
+      \end{center}\par
+      \@thanks
+      \vfil\null
+   \end{titlepage}%
+   \setcounter{footnote}{0}%
+   \global\let\thanks\relax
+   \global\let\maketitle\relax
+   \global\let\@thanks\@empty
+   \global\let\@author\@empty
+   \global\let\@date\@empty
+   \global\let\@title\@empty
+   \global\let\title\relax
+   \global\let\author\relax
+   \global\let\date\relax
+   \global\let\and\relax
+   }
+
+
+\renewcommand{\thepart}{\titlesf{\@Roman\c@part}}
+\renewcommand{\thechapter}{\titlesf{\@arabic\c@chapter}}
+\renewcommand{\thesection}{\titlesf{\thechapter.\@arabic\c@section}}
+\renewcommand{\thesubsection}{\titlesf{\thesection.\@arabic\c@subsection}}
+\renewcommand{\thesubsubsection}{\titlesf{\thesubsection .\@arabic\c@subsubsection}}
+\renewcommand{\theparagraph}{\titlesf{\thesubsubsection.\@arabic\c@paragraph}}
+\renewcommand{\thesubparagraph}{\titlesf{\theparagraph.\@arabic\c@subparagraph}}
+% \def\part{%
+%   \if@openright
+%     \cleardoublepage
+%   \else
+%     \clearpage
+%   \fi
+%   \thispagestyle{plain}%
+%   \if@twocolumn
+%     \onecolumn
+%     \@tempswatrue
+%   \else
+%     \@tempswafalse
+%   \fi
+%   \null\vfil
+%   \secdef\@part\@spart}
+\def\@part[#1]#2{%
+    \ifnum \c@secnumdepth >-2\relax
+      \refstepcounter{part}%
+      \addcontentsline{toc}{part}{\titlesf{\thepart\hspace{1em}#1}}%
+    \else
+      \addcontentsline{toc}{part}{\titlesf{#1}}%
+    \fi
+    \markboth{}{}%
+    {\centering
+     \interlinepenalty \@M
+     \normalfont
+     \ifnum \c@secnumdepth >-2\relax
+       \huge \titlesf{\textbf{\partname~\thepart}}
+       \par
+       \vskip 20\p@
+     \fi
+     \Huge \titlesf{\textbf{#2}}\par}%
+   \thispagestyle{empty}%
+    \@endpart}
+\def\@spart#1{%
+    {\centering
+     \interlinepenalty \@M
+     {\Huge \titlesf{\textbf{#1}}}\par}%
+    \@endpart}
+\def\@endpart{\vfil\newpage
+              \if@twoside
+               \if@openright
+                \null
+                \thispagestyle{empty}%
+                \newpage
+               \fi
+              \fi
+              \if@tempswa
+                \twocolumn
+              \fi}
+\renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+                      \thispagestyle{plain}%
+                      \global\@topnum\z@
+                      \@afterindentfalse
+                      \secdef\@chapter\@schapter}
+\def\@makechapterhead#1{%
+  \vspace*{50\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+        \titlesf{\huge\bfseries \@chapapp\space \thechapter}
+        \par\nobreak
+        \vskip 20\p@
+    \fi
+    \interlinepenalty\@M
+    \titlesf{\Huge \bfseries #1}\par\nobreak
+    \vskip 40\p@
+  }}
+\def\@schapter#1{\if@twocolumn
+                   \@topnewpage[\@makeschapterhead{#1}]%
+                 \else
+                   \@makeschapterhead{#1}%
+                   \@afterheading
+                 \fi}
+\def\@makeschapterhead#1{%
+  \vspace*{50\p@}%
+  {\parindent \z@ \raggedright
+    \normalfont
+    \interlinepenalty\@M
+    \titlesf{\Huge \bfseries #1}\par\nobreak
+    \vskip 40\p@
+  }}
+\else
+\typeout{More the outdoorsy type, I guess.}
+\fi %% End of bookish if
+

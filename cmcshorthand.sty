@@ -1,0 +1,158 @@
+\def\filename{cmcshorthand}
+\def\fileversion{v1.0}
+\def\filedate{2006/04/20}
+
+%%% $Id: cmchmc.sty 21 2006-04-20 21:35:30Z cmc $
+
+%%% ====================================================================
+%%% @LaTeX-file{
+%%%   filename  = "cmcshorthand.sty",
+%%%   version   = "$Revision: 21 $",
+%%%   date      = "$Date: 2006-04-20 14:35:30 -0700 (Thu, 20 Apr 2006) $",
+%%%   org. date = "2002-Jul-05",
+%%%   org. time = "17:22:34 PST",
+%%%   author    = "Claire M. Connelly",
+%%%   copyright = "Copyright (C) 2006 Claire M. Connelly,
+%%%                all rights reserved.  Copying of this file is
+%%%                authorized only if either:
+%%%                (1) you make absolutely no changes to your copy,
+%%%                *including* its name; OR
+%%%                (2) if you do make changes, you first rename it
+%%%                to some other name.",
+%%%   address   = "C.M. Connelly
+%%%                Systems Administrator
+%%%                Department of Mathematics
+%%%                Harvey Mudd College
+%%%                1250 North Dartmouth Avenue
+%%%                Claremont, CA  91711
+%%%                United States of America",
+%%%   telephone = "909-621-8754",
+%%%   FAX       = "909-xxx-xxxx",
+%%%   email     = "cmc@math.hmc.edu (Internet)",
+%%%   codetable = "ISO/ASCII",
+%%%   keywords  = "latex",
+%%%   supported = "yes",
+%%%   abstract  = "Style file for use with documents 
+%%%                created by C.M. Connelly at Harvey Mudd College.",
+%%% }
+%%% ====================================================================
+
+
+
+\ProvidesPackage{cmcshorthand}[\filedate\space\fileversion]
+\typeout{This is package cmcshorthand.sty.}
+
+\RequirePackage{xspace}
+\RequirePackage[obeyspaces,spaces]{url}%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Define some new commands (mostly for logotypes or shortcuts):
+
+\let\textty\texttt
+
+\providecommand{\note}[1]{\marginpar{\raggedright\emph{\small #1}}}
+\providecommand{\tex}{\TeX\xspace} 
+\providecommand{\latex}{\LaTeX\xspace} 
+\providecommand{\latexe}{\LaTeXe\xspace} 
+\providecommand{\bibtex}{{\rmfamily B\kern-.05em%
+    \textsc{i\kern-.025em b}\kern-.08em%
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\providecommand{\pdf}{\textsc{pdf}\xspace}
+\providecommand{\pdftex}{\textsc{pdf}\tex}
+\providecommand{\pdflatex}{\textsc{pdf}\latex}
+\providecommand{\unix}{\textsc{Unix}\xspace}
+\providecommand{\html}{\textsc{html}\xspace}
+\providecommand{\gnu}{\textsc{Gnu}\xspace}
+\providecommand{\gnulinux}{\gnu/Linux\xspace}
+\providecommand{\macosx}{Mac~OS~X\xspace}
+
+
+\providecommand{\ad}{\textsc{a.d.}\xspace}
+\providecommand{\bc}{\textsc{b.c.}\xspace}
+\providecommand{\am}{\textsc{a.m.}\xspace}
+\renewcommand{\pm}{\textsc{p.m.}\xspace}
+
+\providecommand{\eg}{e.g.,}
+\providecommand{\ie}{i.e.,}
+
+\providecommand{\manpage}[2][1]{\textty{#2}(#1)\xspace}
+\providecommand{\prog}[1]{\textty{#1}\xspace}
+\providecommand{\var}[1]{\textty{\emph{#1}}\xspace}
+\providecommand{\class}[1]{\textsf{#1}\xspace}
+\providecommand{\ram}{\textsc{ram}\xspace}
+\providecommand{\dimm}{\textsc{dimm}\xspace}
+\providecommand{\raid}{\textsc{raid}\xspace}
+\providecommand{\cd}{\textsc{cd}\xspace}
+\providecommand{\cdrom}{\textsc{cd-rom}\xspace}
+\providecommand{\dvd}{\textsc{dvd}\xspace}
+\providecommand{\dvdrom}{\textsc{dvd-rom}\xspace}
+
+
+%% Bits
+\providecommand{\Kb}{\textsc{k}b\xspace}
+\providecommand{\Mb}{\textsc{m}b\xspace}
+\providecommand{\Gb}{\textsc{g}b\xspace}
+\providecommand{\Tb}{\textsc{t}b\xspace}
+
+%% Bytes
+\providecommand{\kb}{\textsc{kb}\xspace\typeout{Change this command in your source!}}
+\providecommand{\mb}{\textsc{mb}\xspace\typeout{Change this command in your source!}}
+\providecommand{\gb}{\textsc{gb}\xspace\typeout{Change this command in your source!}}
+\providecommand{\tb}{\textsc{tb}\xspace\typeout{Change this command in your source!}}
+
+\providecommand{\KB}{\textsc{kb}\xspace}
+\providecommand{\MB}{\textsc{mb}\xspace}
+\providecommand{\GB}{\textsc{gb}\xspace}
+\providecommand{\TB}{\textsc{tb}\xspace}
+
+%% Hertz
+\providecommand{\GHz}{\textsc{GH}z\xspace}
+\providecommand{\MHz}{\textsc{MH}z\xspace}
+
+
+\providecommand{\scsi}{\textsc{scsi}\xspace}
+\providecommand{\ide}{\textsc{ide}\xspace}
+\providecommand{\sata}{\textsc{sata}\xspace}
+\providecommand{\rpm}{\textsc{rpm}\xspace}
+\providecommand{\nic}{\textsc{nic}\xspace}
+\providecommand{\RAM}{\textsc{ram}\xspace}
+\providecommand{\ECC}{\textsc{ecc}\xspace}
+\providecommand{\RIMM}{\textsc{rimm}\xspace}
+
+\providecommand{\wreq}{\texttt{wreq}\xspace}
+\providecommand{\debbugs}{\texttt{debbugs}\xspace}
+
+\providecommand{\decision}[1]{\medskip\noindent\textbf{Decision:} #1}
+\providecommand{\action}[1]{\medskip\noindent\textbf{Action:} #1}
+
+
+\providecommand{\machname}[1]{\textsf{#1}\xspace}
+\providecommand{\trumpkin}{\machname{trump\-kin}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+%%% Re/define some things for use with url.sty (for instance, I like my 
+%%% e-mail addresses to appear in italics, and my URLs to show up in a
+%%% sans serif face).
+
+%%% \def\url@itstyle{%
+%%% \@ifundefined{selectfont}{\def\UrlFont{\rm\it}}{\def\UrlFont{\rmfamily\itshape}}\Url@do
+%%% }
+
+\let\url\isourl
+\def\UrlFont{\it}
+
+\def\email{\begingroup\urlstyle{it}\Url}
+%\def\myurl{\begingroup \urlstyle{sf}\Url}
+\def\plainurl{\begingroup \urlstyle{sf}\Url}
+
+\providecommand{\isourl}{\begingroup \def\UrlLeft{<}\def\UrlRight{>}%
+   \urlstyle{sf}\Url}
+\providecommand{\myurl}{\begingroup \def\UrlLeft{<}\def\UrlRight{>}%
+   \urlstyle{sf}\Url}
+\providecommand{\file}{\begingroup\urlstyle{tt}\Url}
+\providecommand{\dir}{\begingroup\urlstyle{tt}\Url}
+\providecommand{\code}{\begingroup\urlstyle{tt}\Url}
+
+\providecommand{\pack}[1]{\textsf{#1}\xspace}

@@ -1,0 +1,50 @@
+\def\filename{cmcmisc}
+\def\fileversion{v1.0}
+\def\filedate{2006/04/20}
+
+%%% $Id: cmchmc.sty 21 2006-04-20 21:35:30Z cmc $
+
+%%% ====================================================================
+%%% @LaTeX-file{
+%%%   filename  = "cmcmisc.sty",
+%%%   version   = "$Revision: 21 $",
+%%%   date      = "$Date: 2006-04-20 14:35:30 -0700 (Thu, 20 Apr 2006) $",
+%%%   org. date = "2002-Jul-05",
+%%%   org. time = "17:22:34 PST",
+%%%   author    = "Claire M. Connelly",
+%%%   copyright = "Copyright (C) 2006 Claire M. Connelly,
+%%%                all rights reserved.  Copying of this file is
+%%%                authorized only if either:
+%%%                (1) you make absolutely no changes to your copy,
+%%%                *including* its name; OR
+%%%                (2) if you do make changes, you first rename it
+%%%                to some other name.",
+%%%   address   = "C.M. Connelly
+%%%                Systems Administrator
+%%%                Department of Mathematics
+%%%                Harvey Mudd College
+%%%                1250 North Dartmouth Avenue
+%%%                Claremont, CA  91711
+%%%                United States of America",
+%%%   telephone = "909-621-8754",
+%%%   FAX       = "909-xxx-xxxx",
+%%%   email     = "cmc@math.hmc.edu (Internet)",
+%%%   codetable = "ISO/ASCII",
+%%%   keywords  = "latex",
+%%%   supported = "yes",
+%%%   abstract  = "Miscellaneous macros.",
+%%% }
+%%% ====================================================================
+
+
+
+\ProvidesPackage{cmcmisc}[\filedate\space\fileversion]
+\typeout{This is package cmcmisc.sty.}
+
+
+%%% Define \textsubscript
+%%% From http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=latex/3798&
+\DeclareRobustCommand*\textsubscript[1]{%
+  \@textsubscript{\selectfont#1}}
+\def\@textsubscript#1{%
+  {\m@th\ensuremath{_{\mbox{\fontsize\sf@size\z@#1}}}}}
