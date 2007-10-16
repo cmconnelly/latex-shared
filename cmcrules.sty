@@ -86,8 +86,9 @@
 
 %% Rule-drawing command.
 \newcommand{\cmcrule}[2][1]{%
-  %% Takes two arguments:
+  %% Takes three arguments:
   %%   Optional: Number of rules to draw (defaults to one).
+  %%   Optional: Width of rule.
   %%   Required: Text to precede the line.  (Can be blank.)
   
 %%  \newlength{\cmcrule@rgwidth}
@@ -102,6 +103,13 @@
     }
   }{}
   \par
+}
+
+\newcommand{\cmcblank}[2][\textwidth]{%
+  %% Takes two arguments:
+  %% Optional: Width of rule to draw (defaults to remainder of line).
+  %% Required: Text to precede the line (can be blank).
+  \makebox[#1]{#2\,{\textcolor{colorlines}{\hrulefill}}}
 }
 
 \newcommand{\blank}{\hbox to 0.75in{\,\hrulefill\,}}
