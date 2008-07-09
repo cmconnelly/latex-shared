@@ -1,0 +1,9 @@
+cmtty.sty allows you to use the Computer Modern Typewriter fonts
+with packages that specify other fonts (e.g., palatino.sty,
+bookman.sty).
+
+If url.sty is loaded, cmtty.sty will also set it to use CMTT.
+
+This package is licensed under the terms of the GNU General Public
+License, version 2.0 or later.
+
