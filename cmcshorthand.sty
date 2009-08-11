@@ -72,10 +72,16 @@
 \providecommand{\macosx}{Mac~OS~X\xspace}
 
 
-\providecommand{\ad}{\textsc{a.d.}\xspace}
-\providecommand{\bc}{\textsc{b.c.}\xspace}
-\providecommand{\am}{\textsc{a.m.}\xspace}
-\renewcommand{\pm}{\textsc{p.m.}\xspace}
+%%% Detect whether the last character is a period, and only
+%%% provide a period if it isn't.
+\providecommand{\ensuresingleperiod}{\@ifnextchar.{}{.\@\xspace}}
+
+\providecommand{\ad}{\textsc{a.d}\ensuresingleperiod}
+\providecommand{\bc}{\textsc{b.c}\ensuresingleperiod}
+\providecommand{\am}{\textsc{a.m}\ensuresingleperiod}
+% We use \renewcommand because \pm is defined by LaTeX as the
+% plus-minus sign for math mode.
+\renewcommand{\pm}{\textsc{p.m}\ensuresingleperiod}
 
 \providecommand{\eg}{e.g.,}
 \providecommand{\ie}{i.e.,}
@@ -84,6 +90,7 @@
 \providecommand{\prog}[1]{\textty{#1}\xspace}
 \providecommand{\var}[1]{\textty{\emph{#1}}\xspace}
 \providecommand{\class}[1]{\textsf{#1}\xspace}
+\providecommand{\bibstyle}[1]{\textsf{#1}\xspace}
 \providecommand{\ram}{\textsc{ram}\xspace}
 \providecommand{\dimm}{\textsc{dimm}\xspace}
 \providecommand{\raid}{\textsc{raid}\xspace}
