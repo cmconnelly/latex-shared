@@ -1,6 +1,6 @@
 \def\filename{cmtty}
-\def\fileversion{v1.2}
-\def\filedate{2006/08/09}
+\def\fileversion{v1.3}
+\def\filedate{2010/06/17}
 
 %%% \iffalse meta-comment
 %%%
@@ -52,40 +52,7 @@
 \ProvidesPackage{cmtty}[\filedate\space\fileversion]
 \typeout{This is package cmtty.sty.}
 
-\RequirePackage{afterpackage}
 
+%%% Use Latin Modern Typewriter as the monospace typeface.
+\renewcommand{\ttdefault}{lmtt}
 
-%%% Use Computer Modern Typewriter as the monospace typeface.
-
-\DeclareRobustCommand{\tyfamily}{%
-  \fontfamily{cmtt}\fontencoding{OT1}\fontseries{m}\selectfont}
-
-\DeclareTextFontCommand{\textty}{\tyfamily}
-
-
-\let\texttt\textty
-\let\tt\tyfamily
-\let\ttfamily\tyfamily
-
-\begingroup
-\catcode`\`=\active
-\gdef\FV@fontfamily@tt{%
-  \def\FV@FontScanPrep{\FV@MakeActive\`}%
-%% SR modification begin - 1995
-%%  \def\FV@FontFamily{\tt`{{\string`}}}}
-  \def\FV@FontFamily{\tyfamily\edef`{{\string`}}}}
-%% SR modification end
-\gdef\FV@fontfamily@cmtt{%
-  \def\FV@FontScanPrep{\FV@MakeActive\`}%
-  \def\FV@FontFamily{\edef`{{\string`}}\fontfamily{cmtt}}}
-\endgroup
-
-
-\AfterPackage{url}{%
-  \def\UrlFont{\tyfamily}
-}
-
-
-\AtBeginDocument{%
-  \def\verbatim@font{\normalfont\tyfamily}
-}
