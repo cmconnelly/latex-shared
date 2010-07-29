@@ -1,0 +1,47 @@
+%%
+%% This file is ``pdfdraftcopy.sty''.
+%% 
+\iffalse
+%% Package pdfdraftcopy to use with LaTeX2e
+%% This package is used to print the word ``DRAFT'' on some pages.
+%%
+%% Based on Dr. Juergen Vollmer's draftcopy.sty and esoex4.tex from 
+%% the eso-pic package.
+%%
+%% Copyright (C) 2005 Claire M. Connelly
+%%                    Harvey Mudd College
+%%                    Claremont, CA  91711
+%%
+%%                    cmc@math.hmc.edu
+%%
+\fi
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{pdfdraftcopy}[2005/07/15 v1.0]
+
+\RequirePackage{graphicx}
+\RequirePackage{color}
+\definecolor{draftgrey}{gray}{0.85}
+\RequirePackage{eso-pic}
+
+\newif\ifminutes@draft
+\DeclareOption{draft}{
+  \minutes@drafttrue
+}
+%\ExecuteOptions{\CurrentOption}
+\ProcessOptions
+
+%%% Indicate whether the document is a draft.
+\ifminutes@draft
+  \AddToShipoutPicture{%
+    \AtTextCenter{%
+      \makebox(0,0)[c]{\resizebox{\textwidth}{!}{%
+        \rotatebox{45}{\textbf{\textsc{\textsf{\color{draftgrey}Draft}}}}
+      }}
+    }
+  %  \AtPageLowerRight{%
+  %  	{\color{lightgray}{Typeset \today}}
+  %  }
+  }
+\fi
+
