@@ -24,7 +24,7 @@
 %%%   codetable = "ISO/ASCII",
 %%%   keywords  = "latex",
 %%%   supported = "yes",
-%%%   abstract  = "Use Computer Modern Typewriter as the monospace typeface.",
+%%%   abstract  = "Use Latin Modern Typewriter as the monospace typeface.",
 %%% }
 %%% ====================================================================
 %%%
@@ -48,6 +48,12 @@
 %%%
 %%% \fi
 %%%
+
+
+%%% This file now simply sets \ttdefault to use Latin Modern
+%%% Typewriter rather than doing more work to use Computer Modern
+%%% Typewriter.  It's meant mostly as a shim for documents using
+%%% the old cmtty package.
 
 \ProvidesPackage{cmtty}[\filedate\space\fileversion]
 \typeout{This is package cmtty.sty.}
