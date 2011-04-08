@@ -1,6 +1,6 @@
 \def\filename{cmcrules.sty}
-\def\fileversion{v1.0}
-\def\filedate{2006/04/20}
+\def\fileversion{v1.2}
+\def\filedate{2011/04/06}
 
 %%% $Id: cmchmc.sty 21 2006-04-20 21:35:30Z cmc $
 
@@ -84,11 +84,13 @@
 %% We need a counter to count down against.
 \newcounter{cmcrulecount}
 
+%% And a length for setting rules.
+\newlength{\@cmcblankwidth}
+
 %% Rule-drawing command.
 \newcommand{\cmcrule}[2][1]{%
   %% Takes three arguments:
   %%   Optional: Number of rules to draw (defaults to one).
-  %%   Optional: Width of rule.
   %%   Required: Text to precede the line.  (Can be blank.)
   
 %%  \newlength{\cmcrule@rgwidth}
@@ -109,7 +111,9 @@
   %% Takes two arguments:
   %% Optional: Width of rule to draw (defaults to remainder of line).
   %% Required: Text to precede the line (can be blank).
-  \makebox[#1]{#2\,{\textcolor{colorlines}{\hrulefill}}}
+  \settowidth{\@cmcblankwidth}{#2}
+  \addtolength{\@cmcblankwidth}{#1}
+  \makebox[\@cmcblankwidth]{#2\,{\textcolor{colorlines}{\hrulefill}}}
 }
 
 \newcommand{\cmcunderblank}[2][\textwidth]{%
