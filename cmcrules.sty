@@ -89,7 +89,7 @@
 
 %% Rule-drawing command.
 \newcommand{\cmcrule}[2][1]{%
-  %% Takes three arguments:
+  %% Takes two arguments:
   %%   Optional: Number of rules to draw (defaults to one).
   %%   Required: Text to precede the line.  (Can be blank.)
   
@@ -99,6 +99,7 @@
   \noindent\hbox to \textwidth {#2 \,{\textcolor{colorlines}{\hrulefill}}}
   \ifthenelse{#1 > 1}{%
     \setcounter{cmcrulecount}{#1}%
+    \addtocounter{cmcrulecount}{-1}
     \whiledo{\value{cmcrulecount} > 0}{%
       \par\bigskip\hbox to \textwidth{\textcolor{colorlines}{\hrulefill}}
       \addtocounter{cmcrulecount}{-1}%
