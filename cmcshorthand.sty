@@ -154,7 +154,7 @@
 %%% }
 
 \let\url\isourl
-\def\UrlFont{\it}
+\def\UrlFont{\sf}
 
 \def\email{\begingroup\urlstyle{it}\Url}
 %\def\myurl{\begingroup \urlstyle{sf}\Url}
@@ -162,7 +162,7 @@
 
 \providecommand{\isourl}{\begingroup \def\UrlLeft{<}\def\UrlRight{>}%
    \urlstyle{sf}\Url}
-\providecommand{\myurl}{\begingroup \def\UrlLeft{<}\def\UrlRight{>}%
+\providecommand{\myurl}{\begingroup \def\UrlLeft{}\def\UrlRight{}%
    \urlstyle{sf}\Url}
 \providecommand{\file}{\begingroup\urlstyle{tt}\Url}
 \providecommand{\dir}{\begingroup\urlstyle{tt}\Url}
