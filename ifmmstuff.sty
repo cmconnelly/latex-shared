@@ -1,35 +1,37 @@
 \typeout{Okay, we're yummy!}
 \ifthenelse{\isundefined{\if@mainmatter}}%
-  {\RequirePackage{chaparral}}%
-  {\RequirePackage[fixbookheaders]{chaparral}}
+  {\RequirePackage[rm,oldstyle]{chaparral}}%
+  {\RequirePackage[rm,oldstyle,fixbookheaders]{chaparral}}
 
 
 %\RequirePackage{keplerornaments}%
 %\RequirePackage{psexpert}%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Make Cronos the sans-serif font family
-\renewcommand{\sfdefault}{pkc9}
-\def\sftndefault{pkc}%                  % (sans font for titling numerals)
-\def\sffndefault{pkc1}%                 % (sans font for footnote numbers)
+\usepackage[sf]{cronos}
+%\usepackage[sf]{myriad}
+% \renewcommand{\sfdefault}{pkc9}
+% \def\sftndefault{pkc}%                  % (sans font for titling numerals)
+% \def\sffndefault{pkc1}%                 % (sans font for footnote numbers)
 
 %% Allow us to use a variant of Cronos with titling numerals for some
 %% things...
 \DeclareRobustCommand\titlesffamily{%
    \not@math@alphabet\titlesffamily\mathsf%
-   \fontfamily{pkc}\selectfont}
-
+   \fontfamily{pkc}\lnstyle\selectfont}
 \DeclareTextFontCommand{\texttsf}{\titlesffamily}
 
 %% We'll do the same for our roman font, Kepler.
 \DeclareRobustCommand\titlermfamily{%
    \not@math@alphabet\titlermfamily\mathrm%
-   \fontfamily{pch}\selectfont}
+   \fontfamily{pch}\lnstyle\selectfont}
 \DeclareTextFontCommand{\texttrm}{\titlermfamily}
 
 % We'll also define commands to allow us to have italic small caps
 
 \DeclareRobustCommand\emphsfsc{%
-   \fontfamily{pkc9}\fontshape{itsc}\selectfont}
+%   \fontfamily{pkc9}\fontshape{itsc}\selectfont}
+   \fontfamily{pkc9}\itshape\scshape\selectfont}
 \DeclareTextFontCommand{\textsfemsc}{\emphsfsc}
 
 \DeclareRobustCommand\emphsf{%
@@ -59,13 +61,13 @@
     \renewcommand{\sectionmark}[1]{%
       \markboth {{
         \ifnum \c@secnumdepth >\z@
-          \titlesf{\thesection}\quad
+          \texttsf{\thesection}\quad
         \fi
         ##1}}{}}%
     \renewcommand{\subsectionmark}[1]{%
       \markright {%
         \ifnum \c@secnumdepth >\@ne
-          \titlesf{\thesubsection}\quad
+          \texttsf{\thesubsection}\quad
         \fi
         ##1}}}
 \else
@@ -76,7 +78,7 @@
     \renewcommand{\sectionmark}[1]{%
       \markright {{%
         \ifnum \c@secnumdepth >\m@ne
-          \titlesf{\thesection}\quad
+          \texttsf{\thesection}\quad
         \fi
         ##1}}}}
 \fi
@@ -100,10 +102,10 @@
   \begin{center}%
 %    \newlength{\@stwidth}%
 %    \settowidth{\@stwidth}{\@subtitle}%
-     {\titlesf{\LARGE \@title}%
+     {\texttsf{\LARGE \@title}%
 %       \ifthenelse{\lengthtest{\@stwidth>100em}}{%
       \ifthenelse{\boolean{\@stset}}{%
-       \linebreak \titlesf{\small \@subtitle\ bar}}%
+       \linebreak \texttsf{\small \@subtitle\ bar}}%
        {\linebreak \textbf{foo}}
 %     {%
 %       \typeout{stwidth is huge}%
@@ -179,9 +181,9 @@
   \vskip 2em%
   \begin{center}%
   \let \footnote \thanks
-    \titlesf{{\LARGE \@title}} \par%
+    \texttsf{{\LARGE \@title}} \par%
     \vskip 1em%
-    \titlesf{{\small \@subtitle}} \par%
+    \texttsf{{\small \@subtitle}} \par%
     \vskip 1.5em%
     {\large
       \lineskip .5em%
@@ -198,7 +200,7 @@
 % We also want to have section headers appear in Cronos:
 \renewcommand{\@seccntformat}[1]{{\fontfamily{pkc}\selectfont\csname%
 the#1\endcsname}\quad}%
-\providecommand{\titlesf}[1]{{\fontfamily{pkc}\selectfont #1}}
+\providecommand{\texttsf}[1]{{\fontfamily{pkc}\selectfont #1}}
 
 % \renewcommand\thepart {\titlesf{\@Roman\c@part}}
 % \renewcommand\thesection {\titlesf{\@arabic\c@section}}
@@ -231,18 +233,18 @@ the#1\endcsname}\quad}%
 \def\@part[#1]#2{%
     \ifnum \c@secnumdepth >\m@ne
       \refstepcounter{part}%
-      \addcontentsline{toc}{part}{\titlesf{\thepart\hspace{1em}#1}}%
+      \addcontentsline{toc}{part}{\texttsf{\thepart\hspace{1em}#1}}%
     \else
-      \addcontentsline{toc}{part}{\titlesf{#1}}%
+      \addcontentsline{toc}{part}{\texttsf{#1}}%
     \fi
     {\parindent \z@ \raggedright
      \interlinepenalty \@M
 %     \normalfont
      \ifnum \c@secnumdepth >\m@ne
-       \Large\titlesf{\textbf{\partname\nobreakspace\thepart}}
+       \Large\texttsf{\textbf{\partname\nobreakspace\thepart}}
        \par\nobreak
      \fi
-     \huge \titlesf{\textbf{#2}}%
+     \huge \texttsf{\textbf{#2}}%
      \markboth{}{}\par}%
     \nobreak
     \vskip 3ex
@@ -251,7 +253,7 @@ the#1\endcsname}\quad}%
     {\parindent \z@ \raggedright
      \interlinepenalty \@M
 %     \normalfont
-     \huge \titlesf{\textbf{#1}}\par}%
+     \huge \texttsf{\textbf{#1}}\par}%
      \nobreak
      \vskip 3ex
      \@afterheading}
@@ -269,15 +271,15 @@ the#1\endcsname}\quad}%
       \null\vfil
       \vskip 60\p@
       \begin{center}%
-         {\titlesf{\LARGE \@title} \par}%
+         {\texttsf{\LARGE \@title} \par}%
          \vskip 3em%
-         {\titlesf{\large
+         {\texttsf{\large
             \lineskip .75em%
             \begin{tabular}[t]{c}%
                \@author
             \end{tabular}}\par}%
          \vskip 1.5em%
-         {\titlesf{\large \@date} \par}%       % Set date in \large size.
+         {\texttsf{\large \@date} \par}%       % Set date in \large size.
       \end{center}\par
       \@thanks
       \vfil\null
@@ -296,13 +298,13 @@ the#1\endcsname}\quad}%
    }
 
 
-\renewcommand{\thepart}{\titlesf{\@Roman\c@part}}
-\renewcommand{\thechapter}{\titlesf{\@arabic\c@chapter}}
-\renewcommand{\thesection}{\titlesf{\thechapter.\@arabic\c@section}}
-\renewcommand{\thesubsection}{\titlesf{\thesection.\@arabic\c@subsection}}
-\renewcommand{\thesubsubsection}{\titlesf{\thesubsection .\@arabic\c@subsubsection}}
-\renewcommand{\theparagraph}{\titlesf{\thesubsubsection.\@arabic\c@paragraph}}
-\renewcommand{\thesubparagraph}{\titlesf{\theparagraph.\@arabic\c@subparagraph}}
+\renewcommand{\thepart}{\texttsf{\@Roman\c@part}}
+\renewcommand{\thechapter}{\texttsf{\@arabic\c@chapter}}
+\renewcommand{\thesection}{\texttsf{\thechapter.\@arabic\c@section}}
+\renewcommand{\thesubsection}{\texttsf{\thesection.\@arabic\c@subsection}}
+\renewcommand{\thesubsubsection}{\texttsf{\thesubsection .\@arabic\c@subsubsection}}
+\renewcommand{\theparagraph}{\texttsf{\thesubsubsection.\@arabic\c@paragraph}}
+\renewcommand{\thesubparagraph}{\texttsf{\theparagraph.\@arabic\c@subparagraph}}
 % \def\part{%
 %   \if@openright
 %     \cleardoublepage
@@ -321,26 +323,26 @@ the#1\endcsname}\quad}%
 \def\@part[#1]#2{%
     \ifnum \c@secnumdepth >-2\relax
       \refstepcounter{part}%
-      \addcontentsline{toc}{part}{\titlesf{\thepart\hspace{1em}#1}}%
+      \addcontentsline{toc}{part}{\texttsf{\thepart\hspace{1em}#1}}%
     \else
-      \addcontentsline{toc}{part}{\titlesf{#1}}%
+      \addcontentsline{toc}{part}{\texttsf{#1}}%
     \fi
     \markboth{}{}%
     {\centering
      \interlinepenalty \@M
      \normalfont
      \ifnum \c@secnumdepth >-2\relax
-       \huge \titlesf{\textbf{\partname~\thepart}}
+       \huge \texttsf{\textbf{\partname~\thepart}}
        \par
        \vskip 20\p@
      \fi
-     \Huge \titlesf{\textbf{#2}}\par}%
+     \Huge \texttsf{\textbf{#2}}\par}%
    \thispagestyle{empty}%
     \@endpart}
 \def\@spart#1{%
     {\centering
      \interlinepenalty \@M
-     {\Huge \titlesf{\textbf{#1}}}\par}%
+     {\Huge \texttsf{\textbf{#1}}}\par}%
     \@endpart}
 \def\@endpart{\vfil\newpage
               \if@twoside
@@ -362,12 +364,12 @@ the#1\endcsname}\quad}%
   \vspace*{50\p@}%
   {\parindent \z@ \raggedright \normalfont
     \ifnum \c@secnumdepth >\m@ne
-        \titlesf{\huge\bfseries \@chapapp\space \thechapter}
+        \texttsf{\huge\bfseries \@chapapp\space \thechapter}
         \par\nobreak
         \vskip 20\p@
     \fi
     \interlinepenalty\@M
-    \titlesf{\Huge \bfseries #1}\par\nobreak
+    \texttsf{\Huge \bfseries #1}\par\nobreak
     \vskip 40\p@
   }}
 \def\@schapter#1{\if@twocolumn
@@ -381,7 +383,7 @@ the#1\endcsname}\quad}%
   {\parindent \z@ \raggedright
     \normalfont
     \interlinepenalty\@M
-    \titlesf{\Huge \bfseries #1}\par\nobreak
+    \texttsf{\Huge \bfseries #1}\par\nobreak
     \vskip 40\p@
   }}
 \else
