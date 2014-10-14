@@ -39,6 +39,31 @@
 \DeclareTextFontCommand{\textemsc}{\emphsc}
 
 
+%%% Use Computer Modern Typewriter as the monospace typeface.
+%%% (Stolen from cs70.cls.)
+
+\DeclareRobustCommand\tyfamily
+        {\fontfamily{cmtt}\fontencoding{OT1}\fontseries{m}\selectfont}
+
+\DeclareTextFontCommand{\textty}{\tyfamily}
+\def\verbatim@font{\normalfont\tyfamily}
+\def\url@ttstyle{%
+\@ifundefined{selectfont}{\def\UrlFont{\tt}}{\def\UrlFont{\tyfamily}}\Url@ttdo
+}
+\begingroup
+\catcode`\`=\active
+\gdef\FV@fontfamily@tt{%
+  \def\FV@FontScanPrep{\FV@MakeActive\`}%
+%% SR modification begin - 1995
+%%  \def\FV@FontFamily{\tt`{{\string`}}}}
+  \def\FV@FontFamily{\tyfamily\edef`{{\string`}}}}
+%% SR modification end
+\gdef\FV@fontfamily@cmtt{%
+  \def\FV@FontScanPrep{\FV@MakeActive\`}%
+  \def\FV@FontFamily{\edef`{{\string`}}\fontfamily{cmtt}}}
+\endgroup
+
+
 % We want to be able to have subtitles.  Step one, define a command to
 % hold such a thing:
 \newboolean{@stset}
