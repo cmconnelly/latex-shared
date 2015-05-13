@@ -227,12 +227,12 @@
 the#1\endcsname}\quad}%
 \providecommand{\texttsf}[1]{{\fontfamily{pkc}\selectfont #1}}
 
-% \renewcommand\thepart {\titlesf{\@Roman\c@part}}
-% \renewcommand\thesection {\titlesf{\@arabic\c@section}}
-% \renewcommand\thesubsection   {\titlesf{\thesection.\@arabic\c@subsection}}
-% \renewcommand\thesubsubsection{\titlesf{\thesubsection .\@arabic\c@subsubsection}}
-% \renewcommand\theparagraph    {\titlesf{\thesubsubsection .\@arabic\c@paragraph}}
-% \renewcommand\thesubparagraph {\titlesf{\theparagraph.\@arabic\c@subparagraph}}
+\renewcommand\thepart {\texttsf{\@Roman\c@part}}
+\renewcommand\thesection {\texttsf{\@arabic\c@section}}
+\renewcommand\thesubsection   {\texttsf{\thesection.\@arabic\c@subsection}}
+\renewcommand\thesubsubsection{\texttsf{\thesubsection .\@arabic\c@subsubsection}}
+\renewcommand\theparagraph    {\texttsf{\thesubsubsection .\@arabic\c@paragraph}}
+\renewcommand\thesubparagraph {\texttsf{\theparagraph.\@arabic\c@subparagraph}}
 
 \renewcommand\section{\@startsection {section}{1}{\z@}%
                                    {-3.5ex \@plus -1ex \@minus -.2ex}%
