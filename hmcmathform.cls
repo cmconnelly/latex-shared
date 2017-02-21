@@ -54,9 +54,17 @@
 \RequirePackage{cmcrules}
 
 
-%%% Set the default typeface via a package.
-\RequirePackage{mathpazo}
-\RequirePackage[scaled=.95]{helvet}
+%%% Set typefaces.
+\RequirePackage[full]{textcomp}
+% \RequirePackage{sourceserifpro}
+\RequirePackage[scaled=0.98,default,sfdefault]{sourcesanspro} % sans-serif
+\RequirePackage{sourcecodepro} % sans-serif typewriter
+\RequirePackage[bigdelims,vvarbb]{newpxmath} % bb from STIX
+\RequirePackage[scr=rsfso]{mathalfa} % mathcal
+\RequirePackage{microtype}
+\DisableLigatures{encoding = T1, family = tt* }
+\linespread{1.025}
+
 
 %%% Set the page layout parameters for a form.
 \setlength{\textwidth}{6.75in}
@@ -85,9 +93,8 @@
 %%% Define the layout of the title block.
 
 \renewcommand{\maketitle}{%
-{\sffamily
-\begin{Huge}
-\noindent\@title
+{\begin{Huge}
+\noindent\textsf{\textbf{\@title}}
 \end{Huge}
 \par
 \begin{large}
