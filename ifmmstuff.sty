@@ -1,3 +1,47 @@
+% \iffalse meta-comment
+%
+%
+% ifmmstuff.sty -- A LaTeX package for using multiple-master or
+%     OpenType fonts to typeset HMC-styled documents; specifically,
+%     Harvey Mudd College's chosen typefaces, Chaparral and Helvetica.
+%
+%   Copyright (C) 2015  C.M. Connelly
+%
+%   This program is free software; you can redistribute it and/or
+%   modify it under the terms of the GNU General Public License as
+%   published by the Free Software Foundation; either version 2 of the
+%   License, or (at your option) any later version.
+%
+%   This program is distributed in the hope that it will be useful,
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%   GNU General Public License for more details.
+%
+%   You should have received a copy of the GNU General Public License
+%   along with this program; if not, write to the Free Software
+%   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+%   02111-1307  USA
+%
+%   The license is also available on the web, from
+%      <http://www.gnu.org/copyleft/gpl.html>
+%
+% \fi
+%%
+%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% You will need to have Adobe's Chaparral Pro and Helvetica LT Std %
+% (commercial fonts) installed to use this package.                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ifmmstuff}[2015/07/02]
+% \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+\ProcessOptions\relax %% <-- fix if we decide to declare some options!
+
+\RequirePackage{ifthen}
+
 \typeout{Okay, we're yummy!}
 \ifthenelse{\isundefined{\if@mainmatter}}%
   {\RequirePackage[rm,oldstyle]{chaparral}}%
@@ -414,4 +458,3 @@ the#1\endcsname}\quad}%
 \else
 \typeout{More the outdoorsy type, I guess.}
 \fi %% End of bookish if
-
